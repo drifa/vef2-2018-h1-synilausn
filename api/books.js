@@ -131,7 +131,7 @@ async function bookPatchRoute(req, res) {
   const validationMessage = await validateBook(req.body, id, true);
 
   if (validationMessage.length > 0) {
-    return res.status(400).json({ errors: validationMessage });
+    return res.header('Access-Control-Allow-Origin', '*').status(400).json({ errors: validationMessage });
   }
 
   const isset = f => typeof f === 'string' || typeof f === 'number';

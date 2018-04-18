@@ -1,5 +1,6 @@
 const express = require('express');
 const { requireAuth } = require('../auth');
+const cors = require('cors');
 
 const router = express.Router();
 
@@ -57,20 +58,20 @@ function indexRoute(req, res) {
 
 router.get('/', indexRoute);
 
-router.get('/users', requireAuth, catchErrors(usersRoute));
-router.get('/users/me', requireAuth, catchErrors(meRoute));
-router.get('/users/:id', requireAuth, catchErrors(userRoute));
-router.put('/users/me', requireAuth, catchErrors(mePatchRoute));
-router.post('/users/me/profile', requireAuth, catchErrors(meProfileRouteWithMulter));
-router.get('/categories', catchErrors(categoriesRoute));
-router.post('/categories', requireAuth, catchErrors(categoriesPostRoute));
+router.get('/users', [cors(), requireAuth], catchErrors(usersRoute));
+router.get('/users/me', [cors(), requireAuth], catchErrors(meRoute));
+router.get('/users/:id', [cors(), requireAuth], catchErrors(userRoute));
+router.put('/users/me', [cors(), requireAuth], catchErrors(mePatchRoute));
+router.post('/users/me/profile', [cors(), requireAuth], catchErrors(meProfileRouteWithMulter));
+router.get('/categories', cors(), catchErrors(categoriesRoute));
+router.post('/categories', [cors(), requireAuth], catchErrors(categoriesPostRoute));
 router.get('/books', catchErrors(booksRoute));
-router.post('/books', requireAuth, catchErrors(booksPostRoute));
+router.post('/books', [cors(), requireAuth], catchErrors(booksPostRoute));
 router.get('/books/:id', catchErrors(bookRoute));
-router.put('/books/:id', requireAuth, catchErrors(bookPatchRoute));
-router.get('/users/me/read', requireAuth, catchErrors(meReadRoute));
-router.get('/users/:id/read', requireAuth, catchErrors(userReadRoute));
-router.post('/users/me/read', requireAuth, catchErrors(meReadPostRoute));
-router.delete('/users/me/read/:id', requireAuth, catchErrors(meReadDeleteRoute));
+router.put('/books/:id', [cors(), requireAuth], catchErrors(bookPatchRoute));
+router.get('/users/me/read', [cors(), requireAuth], catchErrors(meReadRoute));
+router.get('/users/:id/read', [cors(), requireAuth], catchErrors(userReadRoute));
+router.post('/users/me/read', [cors(), requireAuth], catchErrors(meReadPostRoute));
+router.delete('/users/me/read/:id', [cors(), requireAuth], catchErrors(meReadDeleteRoute));
 
 module.exports = router;

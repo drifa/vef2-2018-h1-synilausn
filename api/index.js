@@ -1,7 +1,7 @@
 const express = require('express');
 const { requireAuth } = require('../auth');
 
-const corsModule = return require('cors');
+const corsModule = require('cors');
 
 const router = express.Router();
 

@@ -1,6 +1,11 @@
 const express = require('express');
 const { requireAuth } = require('../auth');
-const cors = require('cors');
+const cors = () -> { return require('cors')({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": true,
+  "optionsSuccessStatus": 204
+}) };
 
 const router = express.Router();
 

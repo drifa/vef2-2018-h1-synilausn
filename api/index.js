@@ -1,14 +1,17 @@
 const express = require('express');
 const { requireAuth } = require('../auth');
-const cors = () -> { return require('cors')({
+
+const corsModule = return require('cors');
+
+const router = express.Router();
+
+
+const cors = () => { return corsModule({
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": true,
   "optionsSuccessStatus": 204
-}) };
-
-const router = express.Router();
-
+}) }
 const {
   categoriesRoute,
   categoriesPostRoute,
